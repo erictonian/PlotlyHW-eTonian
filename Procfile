@@ -1,1 +1,1 @@
-web: gunicorn plotly-hw-etonian.app:app
+web: gunicorn belly_button.app:app
