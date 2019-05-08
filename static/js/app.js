@@ -52,10 +52,24 @@ async function buildCharts(sample) {
   const pieData = [pieTrace]
 
   const bubbleLayout = {
-
+    title: {
+      text: `Microbe Species in Bellybutton ${sample}`,
+    },
+    xaxis: {
+      title: {
+        text: 'Microbe Species by ID'
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Number of particular species'
+      }
+    }
   }
   const pieLayout = {
-
+    title: {
+      text: `Top 10 Microbes in Bellybutton ${sample}`
+    }
   }
 
   Plotly.newPlot('bubble', bubbleData, bubbleLayout)

@@ -62,7 +62,8 @@ def sample_metadata(sample):
         Samples_Metadata.WFREQ,
     ]
 
-    results = db.session.query(*sel).filter(Samples_Metadata.sample == sample).all()
+    results = db.session.query(
+        *sel).filter(Samples_Metadata.sample == sample).all()
 
     # Create a dictionary entry for each row of metadata information
     sample_metadata = {}
@@ -88,11 +89,12 @@ def samples(sample):
     # Filter the data based on the sample number and
     # only keep rows with values above 1
     sample_data = df.loc[df[sample] > 1, ["otu_id", "otu_label", sample]]
+    sorted_data = sample_data.sort_values(by=[sample], ascending=False)
     # Format the data to send as json
     data = {
-        "otu_ids": sample_data.otu_id.values.tolist(),
-        "sample_values": sample_data[sample].values.tolist(),
-        "otu_labels": sample_data.otu_label.tolist(),
+        "otu_ids": sorted_data.otu_id.values.tolist(),
+        "sample_values": sorted_data[sample].values.tolist(),
+        "otu_labels": sorted_data.otu_label.tolist(),
     }
     return jsonify(data)
 
